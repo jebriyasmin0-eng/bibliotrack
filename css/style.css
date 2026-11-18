@@ -1,0 +1,160 @@
+/* ===== Couleurs et réglages communs ===== */
+:root {
+    --bleu: #1f4e79;
+    --bleu-clair: #e7f0f9;
+    --fond: #f4f6f8;
+    --texte: #222;
+    --gris: #6b7280;
+    --rouge: #c0392b;
+    --vert: #1e8449;
+    --rayon: 10px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    background: var(--fond);
+    color: var(--texte);
+}
+
+/* ===== En-tête et onglets ===== */
+header {
+    background: var(--bleu);
+    color: white;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: .5rem 2rem;
+    padding: .8rem 2rem;
+}
+
+.logo { font-size: 1.4rem; font-weight: 700; }
+
+nav { display: flex; gap: .3rem; }
+
+.onglet {
+    background: transparent;
+    color: white;
+    border: 0;
+    padding: .55rem 1rem;
+    border-radius: 6px;
+    font-size: .95rem;
+    cursor: pointer;
+    opacity: .8;
+}
+.onglet:hover { opacity: 1; background: rgba(255, 255, 255, .1); }
+.onglet.actif { opacity: 1; background: white; color: var(--bleu); font-weight: 600; }
+
+main { max-width: 1100px; margin: 0 auto; padding: 1.5rem 1rem; }
+
+/* Une seule section visible à la fois */
+.section { display: none; }
+.section.visible { display: block; }
+
+/* ===== Cartes ===== */
+.carte {
+    background: white;
+    border-radius: var(--rayon);
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 1.2rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .08);
+    overflow-x: auto;
+}
+.carte h2 { font-size: 1.05rem; margin: 0 0 1rem; color: var(--bleu); }
+
+.grille { display: grid; grid-template-columns: 1fr 1fr; gap: 0 1.2rem; }
+.grille .large { grid-column: 1 / -1; }
+
+/* ===== Chiffres clés ===== */
+.chiffres { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; margin-bottom: 1.2rem; }
+.chiffre {
+    background: white;
+    border-radius: var(--rayon);
+    padding: 1rem 1.2rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .08);
+    color: var(--gris);
+}
+.chiffre span { display: block; font-size: 2rem; font-weight: 700; color: var(--bleu); }
+.chiffre.alerte span { color: var(--rouge); }
+
+/* ===== Graphique en colonnes (emprunts par mois) ===== */
+.graphe-colonnes { display: flex; align-items: flex-end; gap: .5rem; height: 200px; }
+.colonne {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    min-width: 0;            /* autorise la colonne à rétrécir sur petit écran */
+    font-size: .8rem;
+}
+.colonne .barre { width: 100%; max-width: 46px; background: var(--bleu); border-radius: 4px 4px 0 0; }
+.colonne .valeur { color: var(--gris); margin-bottom: .2rem; }
+.colonne .mois { color: var(--gris); margin-top: .3rem; }
+
+/* ===== Listes avec barres horizontales ===== */
+.liste-barres { list-style: none; margin: 0; padding: 0; }
+.liste-barres li {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: .2rem .5rem;
+    margin-bottom: .7rem;
+    font-size: .9rem;
+}
+.liste-barres .nombre { font-weight: 600; color: var(--bleu); }
+.liste-barres .fond { grid-column: 1 / -1; background: var(--bleu-clair); border-radius: 4px; height: 8px; }
+.liste-barres .barre { background: var(--bleu); border-radius: 4px; height: 100%; }
+
+/* ===== Tableaux ===== */
+table { width: 100%; border-collapse: collapse; font-size: .92rem; }
+th, td { text-align: left; padding: .55rem .5rem; border-bottom: 1px solid #eceef1; }
+th { color: var(--gris); font-weight: 600; font-size: .85rem; }
+
+.badge { display: inline-block; padding: .15rem .6rem; border-radius: 999px; font-size: .8rem; font-weight: 600; }
+.badge.vert { background: #e5f4e4; color: var(--vert); }
+.badge.rouge { background: #fbebeb; color: var(--rouge); }
+.badge.gris { background: #eceef1; color: var(--gris); }
+
+.vide { color: var(--gris); }
+
+/* ===== Formulaires ===== */
+.filtres, .formulaire { display: flex; flex-wrap: wrap; gap: .6rem; margin-bottom: 1rem; }
+input, select {
+    padding: .55rem .7rem;
+    border: 1px solid #cfd5dc;
+    border-radius: 6px;
+    font: inherit;
+    flex: 1;
+    min-width: 180px;
+}
+button {
+    background: var(--bleu);
+    color: white;
+    border: 0;
+    border-radius: 6px;
+    padding: .55rem 1rem;
+    font: inherit;
+    cursor: pointer;
+}
+button:hover { opacity: .9; }
+td button { padding: .3rem .8rem; font-size: .85rem; }
+
+.message { margin: 0; padding: .6rem .8rem; border-radius: 6px; }
+.message.ok { background: #e5f4e4; color: var(--vert); }
+.message.erreur { background: #fbebeb; color: var(--rouge); }
+
+footer { text-align: center; color: var(--gris); font-size: .85rem; padding: 1rem 1rem 2rem; }
+button.lien { background: none; color: var(--bleu); text-decoration: underline; padding: 0 .3rem; }
+
+/* ===== Petit écran (téléphone) ===== */
+@media (max-width: 700px) {
+    header { padding: .8rem 1rem; }
+    .chiffres { grid-template-columns: 1fr 1fr; }
+    .grille { grid-template-columns: 1fr; }
+    .graphe-colonnes { gap: .2rem; }
+    .colonne { font-size: .62rem; }
+}

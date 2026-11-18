@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BiblioTrack — gestion de bibliothèque</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+    <div class="logo">📚 BiblioTrack</div>
+    <nav>
+        <button class="onglet actif" data-section="tableau">Tableau de bord</button>
+        <button class="onglet" data-section="livres">Livres</button>
+        <button class="onglet" data-section="emprunts">Emprunts</button>
+    </nav>
+</header>
+
+<main>
+    <!-- ===================== TABLEAU DE BORD ===================== -->
+    <section id="tableau" class="section visible">
+        <div class="chiffres">
+            <div class="chiffre"><span id="nbLivres">0</span>livres</div>
+            <div class="chiffre"><span id="nbEnCours">0</span>emprunts en cours</div>
+            <div class="chiffre alerte"><span id="nbRetards">0</span>en retard</div>
+            <div class="chiffre"><span id="tauxALHeure">0 %</span>rendus à temps</div>
+        </div>
+
+        <div class="grille">
+            <div class="carte large">
+                <h2>Emprunts par mois</h2>
+                <div id="grapheMois" class="graphe-colonnes"></div>
+            </div>
+            <div class="carte">
+                <h2>Livres les plus empruntés</h2>
+                <ol id="populaires" class="liste-barres"></ol>
+            </div>
+            <div class="carte">
+                <h2>Emprunts par catégorie</h2>
+                <ol id="categories" class="liste-barres"></ol>
+            </div>
+            <div class="carte large">
+                <h2>Retards à relancer</h2>
+                <table>
+                    <thead><tr><th>Élève</th><th>Livre</th><th>À rendre le</th><th>Retard</th></tr></thead>
+                    <tbody id="tableRetards"></tbody>
+                </table>
+                <p id="aucunRetard" class="vide" hidden>Aucun retard 🎉</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== LIVRES ===================== -->
+    <section id="livres" class="section">
+        <div class="carte">
+            <h2>Catalogue</h2>
+            <div class="filtres">
+                <input id="recherche" type="search" placeholder="Rechercher un titre ou un auteur…">
+                <select id="filtreCategorie"><option value="">Toutes les catégories</option></select>
+            </div>
+            <table>
+                <thead><tr><th>Titre</th><th>Auteur</th><th>Catégorie</th><th>Statut</th></tr></thead>
+                <tbody id="tableLivres"></tbody>
+            </table>
+        </div>
+
+        <div class="carte">
+            <h2>Ajouter un livre</h2>
+            <form id="formLivre" class="formulaire">
+                <input name="titre" placeholder="Titre" required>
+                <input name="auteur" placeholder="Auteur" required>
+                <input name="categorie" placeholder="Catégorie" list="listeCategories" required>
+                <datalist id="listeCategories"></datalist>
+                <button type="submit">Ajouter</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- ===================== EMPRUNTS ===================== -->
+    <section id="emprunts" class="section">
+        <div class="carte">
+            <h2>Nouvel emprunt</h2>
+            <form id="formEmprunt" class="formulaire">
+                <select name="eleve" id="choixEleve" required></select>
+                <select name="livre" id="choixLivre" required></select>
+                <button type="submit">Enregistrer l'emprunt</button>
+            </form>
+            <p id="message" class="message" hidden></p>
+        </div>
+
+        <div class="carte">
+            <h2>Emprunts en cours</h2>
+            <table>
+                <thead><tr><th>Élève</th><th>Livre</th><th>Emprunté le</th><th>À rendre le</th><th></th></tr></thead>
+                <tbody id="tableEnCours"></tbody>
+            </table>
+        </div>
+    </section>
+</main>
+
+<footer>
+    Données de démonstration (fictives), enregistrées dans votre navigateur.
+    <button id="reinitialiser" class="lien">Réinitialiser la démo</button>
+</footer>
+
+<script src="js/calculs.js"></script>
+<script src="js/donnees.js"></script>
+<script src="js/stockage.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
